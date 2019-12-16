@@ -18,7 +18,7 @@ After you have installed the package add the following line in the ```_Imports.r
 @using ThemeSwitcher
 ```
 # Sample usage
-With this extension you can switch themes in several ways:
+With this extension you can switch themes in several ways: 
 **1. Changing css variables values with JSInterop**
    - Create a class implementing ```ThemeSwitcher.IVariableSetter``` interface with this template:
           
@@ -59,12 +59,64 @@ public class VariableSetter : ThemeSwitcher.IVariableSetter
 
    - Then add following lines to ```ConfigureServices``` in ```Startup.cs```:
 
-```
+```C#
 services.AddSingleton<ThemeSwitcher.IVariableSetter, VariableSetter>();
 services.AddSingleton<ThemeSwitcher.ThemeState>();
 ```
    - You will use **ThemeState class** to change to another theme. Attention, **ThemeState** does not implement any kind of server-side or client-side storage between sessions, so you have to implement on your own.
+   Add the following line to ```<body>``` in ```index.html```:
 ```
+<script src="_content/BlazorThemeSwitcher/JsInterop.js"></script>
+```
+   - Below you will find example of Razor Component using **ThemeState**
+``` C#
+@page "/"
+@inject ThemeState ThemeState;
+
+<h1>Hello, Darkness!</h1>
+<button class="btn btn-primary" @onclick="ThemeState.ChangeTheme">Change Theme</button>
+
+@code{
+    protected override void OnInitialized()
+    {
+        //Simulates loading saved data from storage
+        ThemeState.ChangeTheme(Theme.Light);
+    }
+}
+```
+**2. Use UsedTheme or ThemeName**
+   - ```UsedTheme``` returns ```Theme``` enumerator (Light or Dark)
+   - ```ThemeName``` returns string value of ```UsedTheme``` in lowercase ("light" or "dark")
+```C#
+@page "/"
+@inject ThemeState ThemeState;
+@if(ThemeState.UsedTheme == Theme.Light){
+   //This header is only displayed in Light Theme 
+   <h1>Consider changing to dark theme with the button below</h1>
+}
+<div class="@ThemeState.ThemeName">
+   This div is styled with .light or .dark classes depending on current theme!
+</div>
+<button class="btn btn-primary" @onclick="ThemeState.ChangeTheme">Change Theme</button>
+
+@code{
+    protected override void OnInitialized()
+    {
+        //Simulates loading saved data from storage
+        ThemeState.ChangeTheme(Theme.Light);
+    }
+}
+```
+With CSS code for previous snippet:
+```css
+    .light{
+        outline: 2px dotted red;
+    }
+
+    .dark{
+        outline: 3px dashed white;
+        font-size: 2rem;
+    }
 
 ```
           
