@@ -1,7 +1,7 @@
 [![License](https://img.shields.io/github/license/BlazorExtensions/Storage.svg?longCache=true&style=flat-square)](https://github.com/DominikNITA/Blazor.ThemeSwitcher/blob/master/LICENSE)
 [![Package Version](https://img.shields.io/badge/nuget-v1.0.1-blue.svg?longCache=true&style=flat-square)](https://www.nuget.org/packages/BlazorThemeSwitcher/)
 # BlazorThemeSwitcher
-Simple and flexible way to allow your Blazor app to switch between light and dark mode. If you are looking for more elaborate solution check MatBlazor at https://www.matblazor.com/Themes
+Simple and flexible way to allow your Blazor app to switch between light and dark mode. If you are looking for more elaborated solution check MatBlazor at https://www.matblazor.com/Themes
 # Nuget Gallery
 The Nuget package page can be found at https://www.nuget.org/packages/BlazorThemeSwitcher/
 # Installation
