@@ -1,0 +1,18 @@
+﻿@page "/"
+@using Dodo.BlazorThemeSwitcher
+@inject ThemeManager TM
+<h1>Hello, darkness!</h1>
+
+<p>Welcome to your new app with theme switching.</p>
+@if (TM.GetCurrentTheme() == "light")
+{
+    //This header is only displayed in Light Theme
+    <h1>Consider changing to dark theme with the button below</h1>
+}
+<button @onclick="@(()=>TM.SwitchTheme())">Switch theme</button>
+
+<p>Current theme is: @TM.GetCurrentTheme()</p>
+
+<div class="text @TM.GetCurrentTheme()">
+    This div is styled with .light or .dark classes depending on current theme!
+</div>
