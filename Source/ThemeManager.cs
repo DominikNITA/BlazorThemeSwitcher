@@ -42,7 +42,7 @@ namespace Dodo.BlazorThemeSwitcher
         public string SwitchTheme(string theme)
         {
             int i = Array.IndexOf(Themes, theme);
-            if (i > 0)
+            if (i => 0)
             {
                 _currentThemeIndex = i;
             }
